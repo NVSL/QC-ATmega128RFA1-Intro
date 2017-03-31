@@ -30,7 +30,6 @@ void loop()
   if (rfAvailable())  // If serial comes in...
   {
     char a = rfRead();
-    rfWrite('.');
     rfWrite(a); // ...send it out the radio.
     Serial.write(a);
   }
