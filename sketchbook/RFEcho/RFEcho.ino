@@ -12,13 +12,13 @@
   Data into the RF radio will go out the MCU's UART0.
 */
 
-#include "RadioFunctions.h"
+#include "radio.h"
 
 void setup()
 {
   Serial.begin(9600);  // Start up serial
-  Serial1.begin(115200);
-  rfBegin(11);  // Initialize ATmega128RFA1 radio on channel 11 (can be 11-26)
+  //Serial1.begin(115200);
+  rfBegin(10);  // Initialize ATmega128RFA1 radio on channel 11 (can be 11-26)
   
   // Send a message to other RF boards on this channel
   rfPrint("ATmega128RFA1 Dev Board Online!\r\n");
@@ -26,13 +26,12 @@ void setup()
 
 void loop()
 {
-  
-  if (Serial.available())  // If serial comes in...
+
+  if (rfAvailable())  // If serial comes in...
   {
-    rfWrite(Serial.read()); // ...send it out the radio.
-  }
-  if (rfAvailable())  // If data receievd on radio...
-  {
-    Serial.print(rfRead());  // ... send it out serial.
+    char a = rfRead();
+    rfWrite('.');
+    rfWrite(a); // ...send it out the radio.
+    Serial.write(a);
   }
 }
