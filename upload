@@ -1,0 +1,3 @@
+#!/bin/bash
+
+/Applications/Arduino.app/Contents/Java/hardware/tools/avr/bin/avrdude -C/Applications/Arduino.app/Contents/Java/hardware/tools/avr/etc/avrdude.conf -v -patmega128rfa1 -carduino -P$(ls /dev/cu.usbserial-A*|head -1)  -b57600 -D -Uflash:w:/var/folders/5h/k2xt_l014s1c1gvmnssm963c0000gp/T/arduino_build_149868/RFChat.ino.hex:i ; cat $(ls /dev/cu.usbserial-A*|head -1)
